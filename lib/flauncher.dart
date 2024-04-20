@@ -26,6 +26,7 @@ import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/providers/wallpaper_service.dart';
 import 'package:flauncher/widgets/apps_grid.dart';
 import 'package:flauncher/widgets/category_row.dart';
+import 'package:flauncher/widgets/focus_animated.dart';
 import 'package:flauncher/widgets/launcher_alternative_view.dart';
 import 'package:flauncher/widgets/network_widget.dart';
 import 'package:flauncher/widgets/settings/settings_panel.dart';
@@ -98,18 +99,23 @@ class FLauncher extends StatelessWidget {
   AppBar _appBar(BuildContext context) {
     return AppBar(
       actions: [
-        IconButton(
-          padding: const EdgeInsets.all(2),
-          constraints: const BoxConstraints(),
-          splashRadius: 20,
-          icon: const Icon(Icons.settings_outlined,
-            shadows: [
-              Shadow(color: Colors.black54, blurRadius: 8, offset: Offset(0, 2))
-            ],
+        FocusAnimated(
+            unfocusedSize: 24,
+            focusedSize: 48,
+            builder: (context, size) => IconButton(
+              iconSize: size,
+              padding: const EdgeInsets.all(2),
+              constraints: const BoxConstraints(),
+              splashRadius: 20,
+              icon: const Icon(Icons.settings_outlined,
+                shadows: [
+                  Shadow(color: Colors.black54, blurRadius: 8, offset: Offset(0, 2))
+                ],
+              ),
+              onPressed: () => showDialog(context: context, builder: (_) => const SettingsPanel()),
+              // sometime after Flutter 3.7.5, no later than 3.16.8, the focus highlight went away
+              //focusColor: Theme.of(context).primaryColorLight,
           ),
-          onPressed: () => showDialog(context: context, builder: (_) => const SettingsPanel()),
-          // sometime after Flutter 3.7.5, no later than 3.16.8, the focus highlight went away
-          focusColor: Theme.of(context).primaryColorLight,
         ),
         const Padding(
           padding: EdgeInsets.only(left: 16),
