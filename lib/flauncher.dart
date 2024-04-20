@@ -114,7 +114,7 @@ class FLauncher extends StatelessWidget {
               ),
               onPressed: () => showDialog(context: context, builder: (_) => const SettingsPanel()),
               // sometime after Flutter 3.7.5, no later than 3.16.8, the focus highlight went away
-              //focusColor: Theme.of(context).primaryColorLight,
+              focusColor: Colors.white60,
           ),
         ),
         const Padding(
